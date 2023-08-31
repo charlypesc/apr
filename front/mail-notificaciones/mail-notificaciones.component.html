@@ -1,0 +1,61 @@
+<div class="container">
+    <h4>Agrega o edita los correos electronicos para los diferentes tipos de notificaciones</h4>
+    <div class="row">
+        <div class="card p-2 mb-2" [formGroup]="formMail">
+            <div class="d-flex align-items-center">
+                <div class="form-floating col-4 mb-2 me-1">
+                    <select name="" id="usuarios" class="form-control" formControlName="UsuarioId">
+                        <option selected disabled>Seleccione un usuario</option>
+                        <option *ngFor="let opt of usuarios$| async" [value]="opt.id">{{opt.nombre}}</option>
+                    </select>
+                    <label for="usuarios">Seleccionar usuario</label>
+                </div>
+                <div class="form-floating mb-2 col-4">
+                    <input type="text" class="form-control" id="director" formControlName="Mail">
+                    <label for="director" class="for">Ingresa Mail</label>
+                </div>
+                <div class="form-floating ms-1 mb-2 col-3">
+                    <select class="form-control" name="" id="perfil" formControlName="PerfilId">
+                        <option>Selecciona un tipo de perfil</option>
+                        <option *ngFor="let opt of perfiles$|async" [value]="opt.id">{{opt.tipoPerfil}}</option>
+                    </select>
+                    <label for="perfil">Tipo de Perfil</label>
+                </div>
+                <div class="mb-2 ms-2">
+                    <button class="btn btn-success btn-sm" (click)="agregarNuevoMail()"><i
+                            class="bi bi-plus-circle-fill"></i>
+                        Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card p-2">
+            <h5 class="mb-1 mt-1">Correos electronicos ingresados para notificaciones:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>Nombre</th>
+                        <th>Perfil</th>
+                        <th>Mail</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let opt of correos$|async; let x=index ">
+                        <td>{{x+1}}</td>
+                        <td>{{opt.usuario.nombre}}</td>
+                        <td>{{opt.perfil.tipoPerfil}}</td>
+                        <td>{{opt.mail}}</td>
+                        <td>
+
+                            <button class="btn btn-sm btn-danger" (click)="delete(opt.id)"><i
+                                    class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
